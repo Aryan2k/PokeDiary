@@ -2,7 +2,6 @@ package com.aryanm468.data.mappers
 
 import com.aryanm468.data.entities.pokemon_details.Ability
 import com.aryanm468.data.entities.pokemon_details.AbilityX
-import com.aryanm468.data.entities.pokemon_details.Form
 import com.aryanm468.data.entities.pokemon_details.PokemonDetailsEntity
 import com.aryanm468.data.entities.pokemon_details.Sprites
 import com.aryanm468.data.entities.pokemon_details.Stat

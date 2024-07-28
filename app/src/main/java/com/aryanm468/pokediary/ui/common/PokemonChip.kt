@@ -13,9 +13,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import com.aryanm468.pokediary.utils.ColorHelper
 
 @Composable
-fun PokemonChip(modifier: Modifier = Modifier, text: String, cardBackgroundColor: Color = Color.White.copy(alpha = 0.3f)) {
+fun PokemonChip(modifier: Modifier = Modifier, text: String, cardBackgroundColor: Color = ColorHelper.white().copy(alpha = 0.3f)) {
     Card(
         shape = RoundedCornerShape(16.dp),
         modifier = modifier
@@ -26,7 +27,7 @@ fun PokemonChip(modifier: Modifier = Modifier, text: String, cardBackgroundColor
         Text(
             text = text,
             style = MaterialTheme.typography.bodySmall,
-            color = Color.White,
+            color = ColorHelper.white(),
             modifier = Modifier.padding(horizontal = 16.dp, vertical = 6.dp),
             fontWeight = FontWeight.SemiBold
         )

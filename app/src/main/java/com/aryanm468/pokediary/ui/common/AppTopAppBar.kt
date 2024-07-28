@@ -1,9 +1,11 @@
 package com.aryanm468.pokediary.ui.common
 
 import androidx.annotation.DrawableRes
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
@@ -30,24 +32,27 @@ fun AppTopAppBar(
     scrollBehavior: TopAppBarScrollBehavior? = null,
     onNavigationIconClick: () -> Unit = {}
 ) {
-    TopAppBar(
-        title = title,
-        modifier = modifier,
-        navigationIcon = {
-            if (navigationIcon != null) {
-                IconButton(onClick = { onNavigationIconClick() }) {
-                    Icon(
-                        painter = painterResource(id = navigationIcon),
-                        contentDescription = stringResource(R.string.navigation_icon),
-                    )
+    Column {
+        TopAppBar(
+            title = title,
+            modifier = modifier,
+            navigationIcon = {
+                if (navigationIcon != null) {
+                    IconButton(onClick = { onNavigationIconClick() }) {
+                        Icon(
+                            painter = painterResource(id = navigationIcon),
+                            contentDescription = stringResource(R.string.navigation_icon),
+                        )
+                    }
                 }
-            }
-        },
-        actions = actions,
-        windowInsets = windowInsets,
-        colors = colors,
-        scrollBehavior = scrollBehavior
-    )
+            },
+            actions = actions,
+            windowInsets = windowInsets,
+            colors = colors,
+            scrollBehavior = scrollBehavior
+        )
+        HorizontalDivider()
+    }
 }
 
 

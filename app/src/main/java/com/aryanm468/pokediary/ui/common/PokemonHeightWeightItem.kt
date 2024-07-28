@@ -7,10 +7,10 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.aryanm468.pokediary.utils.ColorHelper
 
 @Composable
 fun PokemonHeightWeightItem(headingText: String, valueText: String) {
@@ -20,7 +20,7 @@ fun PokemonHeightWeightItem(headingText: String, valueText: String) {
             style = MaterialTheme.typography.bodySmall,
             fontWeight = FontWeight.Medium,
             fontSize = 14.sp,
-            color = Color.Gray
+            color = ColorHelper.gray()
         )
         Spacer(modifier = Modifier.height(8.dp))
         Text(

@@ -17,6 +17,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
+import com.aryanm468.pokediary.utils.ColorHelper
 
 @Composable
 fun PokemonSpriteItem(
@@ -24,8 +25,8 @@ fun PokemonSpriteItem(
     sprite: String,
     name: String,
     form: String,
-    cardBackgroundColor: Color = Color.White,
-    formTextColor: Color = Color.White,
+    cardBackgroundColor: Color = ColorHelper.white(),
+    formTextColor: Color = ColorHelper.white(),
     onItemClick: () -> Unit = {}
 ) {
     Column(modifier = modifier.clickable { onItemClick() }, horizontalAlignment = Alignment.CenterHorizontally) {

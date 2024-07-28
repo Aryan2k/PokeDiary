@@ -1,7 +1,6 @@
 package com.aryanm468.pokediary.ui.home
 
 import android.os.Bundle
-import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.Column
@@ -42,7 +41,7 @@ class HomeActivity : BaseActivity() {
                             }
                             composable<PokemonDetailDestination> { backStackEntry ->
                                 val pokemonDetailsDestination = backStackEntry.toRoute<PokemonDetailDestination>()
-                                PokemonDetailScreen(detailsApiUrl = pokemonDetailsDestination.detailsApiUrl, navController = navController)
+                                PokemonDetailScreen(detailsApiUrl = pokemonDetailsDestination.detailsApiUrl)
                             }
                         }
                     }

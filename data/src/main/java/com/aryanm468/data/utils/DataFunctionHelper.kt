@@ -6,6 +6,12 @@ import android.net.NetworkCapabilities
 
 internal object DataFunctionHelper {
 
+    /**
+     * Checks if the network is available and connected.
+     *
+     * @param context The context used to get the ConnectivityManager.
+     * @return True if the network is available, false otherwise.
+     */
     fun isNetworkAvailable(context: Context): Boolean {
         val connectivityManager =
             context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager?

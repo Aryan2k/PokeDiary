@@ -31,6 +31,9 @@ class PokemonListViewModel @Inject constructor(private val getPokemonListUseCase
     private var _getPokemonListStateFlow: MutableStateFlow<ResponseState<PokemonListBean>> = MutableStateFlow(ResponseState.none())
     val getPokemonListStateFlow = _getPokemonListStateFlow.asStateFlow()
 
+    /**
+     * Fetches the list of Pokémon from the API and updates the corresponding state flows.
+     */
     fun getPokemonList() {
         currentPokemonListJob?.cancel()
         currentPokemonListJob = backgroundCall {

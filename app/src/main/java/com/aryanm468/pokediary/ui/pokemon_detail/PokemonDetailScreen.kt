@@ -24,30 +24,32 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.navigation.NavHostController
 import com.aryanm468.base.utils.RequestStatusEnum
 import com.aryanm468.pokediary.R
 import com.aryanm468.pokediary.beans.pokemon_details.Ability
 import com.aryanm468.pokediary.beans.pokemon_details.PokemonDetailsBean
 import com.aryanm468.pokediary.beans.pokemon_details.Stat
+import com.aryanm468.pokediary.ui.common.PokeBallLoading
+import com.aryanm468.pokediary.ui.common.PokemonChip
 import com.aryanm468.pokediary.ui.common.PokemonHeightWeightItem
 import com.aryanm468.pokediary.ui.common.PokemonSpriteItem
-import com.aryanm468.pokediary.ui.common.PokemonChip
 import com.aryanm468.pokediary.ui.common.PokemonStatItem
 import com.aryanm468.pokediary.utils.AppFunctionHelper
+import com.aryanm468.pokediary.utils.ColorHelper
 
 @Composable
-fun PokemonDetailScreen(detailsApiUrl: String, navController: NavHostController) {
+fun PokemonDetailScreen(detailsApiUrl: String) {
     val viewModel = hiltViewModel<PokemonDetailViewModel>()
     val snackBarHostState = remember { SnackbarHostState() }
     Scaffold(
@@ -80,10 +82,13 @@ fun PokemonDetailScreen(detailsApiUrl: String, navController: NavHostController)
 @Composable
 private fun HandleGetPokemonDetailsState(viewModel: PokemonDetailViewModel) {
     val getPokemonDetails by viewModel.getPokemonDetailsFlow.collectAsState()
+    val getPokemonDetailsData = getPokemonDetails.data
+    val isResponseHandled = rememberSaveable { mutableStateOf(false) }
+
     when (getPokemonDetails.status) {
         RequestStatusEnum.Success -> {
-            if (getPokemonDetails.data != null) {
-                PokemonDetailsSection(pokemonDetails = getPokemonDetails.data!!, viewModel = viewModel)
+            if (getPokemonDetailsData != null) {
+                PokemonDetailsSection(pokemonDetails = getPokemonDetailsData, viewModel = viewModel)
             } else {
                 Box(
                     modifier = Modifier.fillMaxSize(),
@@ -97,11 +102,14 @@ private fun HandleGetPokemonDetailsState(viewModel: PokemonDetailViewModel) {
         }
 
         RequestStatusEnum.Exception -> {
-            viewModel.snackBarMessageState.value = getPokemonDetails.message.orEmpty()
+            if (!isResponseHandled.value) {
+                viewModel.snackBarMessageState.value = getPokemonDetails.message.orEmpty()
+                isResponseHandled.value = true
+            }
         }
 
         RequestStatusEnum.Loading -> {
-            // No need to handle
+            PokeBallLoading()
         }
 
         RequestStatusEnum.None -> {
@@ -147,7 +155,7 @@ private fun PokemonBasicDetailsSection(pokemonDetails: PokemonDetailsBean) {
                     text = pokemonDetails.name,
                     fontSize = 32.sp,
                     fontWeight = FontWeight.Bold,
-                    color = Color.White
+                    color = ColorHelper.white()
                 )
                 Spacer(modifier = Modifier.height(8.dp))
                 Row(
@@ -164,7 +172,7 @@ private fun PokemonBasicDetailsSection(pokemonDetails: PokemonDetailsBean) {
                 text = stringResource(R.string.hash) + AppFunctionHelper.addLeadingZeroes(pokemonDetails.id.toString()),
                 fontSize = 28.sp,
                 fontWeight = FontWeight.Medium,
-                color = Color.White
+                color = ColorHelper.white()
             )
         }
     }
@@ -256,7 +264,7 @@ private fun PokemonAbilitiesSection(abilities: List<Ability>) {
             text = stringResource(R.string.abilities),
             fontSize = 24.sp,
             fontWeight = FontWeight.Bold,
-            color = Color.White
+            color = ColorHelper.white()
         )
         Spacer(modifier = Modifier.height(16.dp))
         Row {
@@ -280,7 +288,7 @@ private fun PokemonStatsSection(stats: List<Stat>) {
             text = stringResource(R.string.stats),
             fontSize = 24.sp,
             fontWeight = FontWeight.Bold,
-            color = Color.White
+            color = ColorHelper.white()
         )
         Spacer(modifier = Modifier.height(24.dp))
         Column {

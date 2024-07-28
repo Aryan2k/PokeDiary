@@ -1,6 +1,7 @@
 package com.aryanm468.data.di
 
 import android.content.Context
+import com.aryanm468.data.data_source.remote.AppNetworkInterceptor
 import com.aryanm468.data.data_source.remote.PokemonApi
 import com.aryanm468.data.utils.DataConstantsHelper
 import com.chuckerteam.chucker.api.ChuckerCollector
@@ -37,15 +38,27 @@ class DataSourceModule {
     }
 
     @Provides
+    fun provideContext(@ApplicationContext context: Context): Context {
+        return context
+    }
+
+    @Provides
     @Singleton
-    fun getOkHttpClient(@ApplicationContext context: Context): OkHttpClient {
+    fun provideOkHttpClient(context: Context, appNetworkInterceptor: AppNetworkInterceptor): OkHttpClient {
         val chuckerInterceptor = ChuckerInterceptor.Builder(context)
             .collector(ChuckerCollector(context))
             .alwaysReadResponseBody(true)
             .build()
-       return OkHttpClient.Builder()
+        return OkHttpClient.Builder()
             .addInterceptor(chuckerInterceptor)
+            .addInterceptor(appNetworkInterceptor)
             .build()
+    }
+
+    @Provides
+    @Singleton
+    fun provideNetworkInterceptor(context: Context): AppNetworkInterceptor {
+        return AppNetworkInterceptor(context = context)
     }
 
 }
