@@ -267,10 +267,19 @@ private fun PokemonAbilitiesSection(abilities: List<Ability>) {
             color = ColorHelper.white()
         )
         Spacer(modifier = Modifier.height(16.dp))
-        Row {
-            abilities.forEach {
-                PokemonChip(text = it.ability.name + if (it.is_hidden) stringResource(R.string.hidden) else "")
-                Spacer(modifier = Modifier.width(16.dp))
+        abilities.chunked(2).forEach { pair ->
+            Row(
+                modifier = Modifier.padding(bottom = 16.dp),
+                horizontalArrangement = Arrangement.spacedBy(16.dp)
+            ) {
+                pair.forEach { ability ->
+                    PokemonChip(
+                        text = ability.ability.name + if (ability.is_hidden) stringResource(R.string.hidden) else ""
+                    )
+                }
+                if (pair.size < 2) {
+                    Spacer(modifier = Modifier.weight(1f))
+                }
             }
         }
     }
