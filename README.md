@@ -44,5 +44,5 @@ PokeDiary is your ultimate companion for all things Pokémon! This comprehensive
 
 ## Installation
 
-Please use this link to download the apk: https://drive.google.com/file/d/1mWLVi2IgHKQQ5P66qYD8QsbBcxMMFCyl/view
+Please use this link to download the apk: https://drive.google.com/file/d/1A0hbmcsr2Tez3Brls0eVgT-KlShEbkB3/view?usp=sharing
 
