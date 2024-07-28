@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">PokeDiary</string>
+    <string name="navigation_icon">Navigation Icon</string>
+    <string name="pokedex">Pokedex</string>
+    <string name="no_data_found">No data found!</string>
+    <string name="normal_form">Normal Form</string>
+    <string name="shiny_form">Shiny Form</string>
+    <string name="height">Height</string>
+    <string name="weight">Weight</string>
+    <string name="abilities">Abilities</string>
+    <string name="hidden">" (Hidden)"</string>
+    <string name="hash">#</string>
+    <string name="stats">Stats</string>
+</resources>
